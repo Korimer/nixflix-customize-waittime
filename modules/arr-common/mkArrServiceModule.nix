@@ -73,6 +73,18 @@ in
       };
     };
 
+    waitForApiAttempts = mkOption {
+      type = types.int;
+      default = 30;
+      description = "Maximum number of attempts to wait for the API.";
+    };
+
+    sleepOnFailSeconds = mkOption {
+      type = types.int;
+      default = 2;
+      description = "Seconds to wait between API availability checks.";
+    };
+
     connectionAddress = mkOption {
       type = types.str;
       readOnly = true;
