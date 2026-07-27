@@ -23,6 +23,10 @@ let
   credentialPath = "/run/credentials/${serviceName}.service/apiKey";
   waitConfig =
     cfg.config
+    // {
+      waitForApiAttempts = cfg.waitForApiAttempts;
+      sleepOnFailSeconds = cfg.sleepOnFailSeconds;
+    }
     // optionalAttrs apiKeyIsSecretRef {
       apiKey = {
         _secret = credentialPath;
