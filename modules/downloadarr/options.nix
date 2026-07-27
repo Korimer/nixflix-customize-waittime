@@ -54,6 +54,8 @@ let
       host ? { },
       port ? { },
       urlBase ? { },
+      waitForApiAttempts ? { },
+      sleepOnFailSeconds ? { },
       extraOptions ? { },
     }:
     types.submodule {
@@ -116,6 +118,24 @@ let
             default = "";
           }
           // urlBase
+        );
+
+        waitForApiAttempts = mkOption (
+          {
+            type = types.int;
+            default = 30;
+            description = "Maximum number of attempts to wait for the API.";
+          }
+          // waitForApiAttempts
+        );
+
+        sleepOnFailSeconds = mkOption (
+          {
+            type = types.int;
+            default = 2;
+            description = "Seconds to wait between API availability checks.";
+          }
+          // sleepOnFailSeconds
         );
 
         categories = categoriesOption;
