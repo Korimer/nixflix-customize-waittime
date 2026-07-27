@@ -22,16 +22,18 @@ let
   apiKeyIsSecretRef = cfg.config.apiKey != null && secrets.isSecretRef cfg.config.apiKey;
   credentialPath = "/run/credentials/${serviceName}.service/apiKey";
   waitConfig =
-    cfg.config
-    // {
-      waitForApiAttempts = cfg.waitForApiAttempts;
-      sleepOnFailSeconds = cfg.sleepOnFailSeconds;
-    }
-    // optionalAttrs apiKeyIsSecretRef {
-      apiKey = {
-        _secret = credentialPath;
-      };
-    };
+    builtins.trace waitConfig (
+      cfg.config
+      // {
+        waitForApiAttempts = cfg.waitForApiAttempts;
+        sleepOnFailSeconds = cfg.sleepOnFailSeconds;
+      }
+      // optionalAttrs apiKeyIsSecretRef {
+        apiKey = {
+          _secret = credentialPath;
+        };
+      }
+    );
 
   mkServarrSettingsEnvVars =
     name: settings:
