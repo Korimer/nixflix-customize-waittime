@@ -29,7 +29,7 @@ pkgs.writeShellScript "${serviceName}-wait-for-api" (
       sleep ${sleepSeconds}
     done
 
-    echo "${capitalizedName} API not available after ${apiAttempts * sleepSeconds} seconds" >&2
+    echo "${capitalizedName} API not available after ${builtins.toString (serviceConfig.waitForApiAttempts * serviceConfig.sleepOnFailSeconds)} seconds" >&2
     exit 1
   ''
 )
