@@ -23,10 +23,6 @@ let
   credentialPath = "/run/credentials/${serviceName}.service/apiKey";
   waitConfig =
     cfg.config
-    // {
-      waitForApiAttempts = cfg.waitForApiAttempts;
-      sleepOnFailSeconds = cfg.sleepOnFailSeconds;
-    }
     // optionalAttrs apiKeyIsSecretRef {
       apiKey = {
         _secret = credentialPath;
@@ -77,17 +73,6 @@ in
       };
     };
 
-    waitForApiAttempts = mkOption {
-      type = types.int;
-      default = 30;
-      description = "Maximum number of attempts to wait for the API.";
-    };
-
-    sleepOnFailSeconds = mkOption {
-      type = types.int;
-      default = 2;
-      description = "Seconds to wait between API availability checks.";
-    };
 
     connectionAddress = mkOption {
       type = types.str;
@@ -241,6 +226,18 @@ in
           openssl rand -hex 16
           ```
         '';
+      };
+
+      waitForApiAttempts = mkOption {
+        type = types.int;
+        default = 30;
+        description = "Maximum number of attempts to wait for the API.";
+      };
+
+      sleepOnFailSeconds = mkOption {
+        type = types.int;
+        default = 2;
+        description = "Seconds to wait between API availability checks.";
       };
     };
   };
