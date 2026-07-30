@@ -84,5 +84,23 @@ in
         passed with `--logdir` see [#log-directory](https://jellyfin.org/docs/general/administration/configuration/#log-directory)
       '';
     };
+
+    waitForApiAttempts = mkOption {
+      type = types.int;
+      default = 240;
+      description = ''
+        Number of attempts the Jellyfin readiness check will make before failing.
+
+        Each attempt waits `sleepOnFailSeconds` seconds between checks.
+      '';
+    };
+
+    sleepOnFailSeconds = mkOption {
+      type = types.int;
+      default = 1;
+      description = ''
+        Number of seconds to wait between failed Jellyfin readiness checks.
+      '';
+    };
   };
 }
